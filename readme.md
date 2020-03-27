@@ -151,7 +151,7 @@ QVCloudEngine.composite(config, new onCompositeListener() {
 | :-: | :-: | :-: | :-: |
 | forceMake | 是否强制生成，true：强制，false：不强制，默认false。<br>例：素材要求选择人脸照片，选择的人脸照片像素低，<br>可以强制合成，但是建议更换更清晰的照片。 | boolean | 非必须 | 
 | templateId | 素材Id（在素材接口里面获取）| number | 必须 | 
-| resolution | 视频分辨率：480p/ 720p/1080pResolution | 必须 | 
+| resolution | 视频分辨率：480p/ 720p/1080p | Resolution | 必须 | 
 | localMedias | 本地图片组/视频 | List< CompositeConfig.Media > | 必须|
 
 **CompositeConfig.Media：单个源文件参数**
