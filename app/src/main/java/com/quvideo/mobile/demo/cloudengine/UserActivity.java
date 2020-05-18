@@ -11,6 +11,7 @@ import com.quvideo.mobile.external.component.cloudengine.model.CloudEngineConfig
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Locale;
 
 /**
  * Created by santa on 2020-03-23.
@@ -34,7 +35,11 @@ public class UserActivity extends AppCompatActivity {
             Toast.makeText(this, "需要填入用户id", Toast.LENGTH_SHORT).show();
             return;
         }
-        CloudEngineConfig config = new CloudEngineConfig(App.APP_KEY, App.APP_SECRET, mEditText.getText().toString(), true);
+        String country = Locale.getDefault().getCountry();
+        String language = Locale.getDefault().getLanguage();
+        CloudEngineConfig config = new CloudEngineConfig(App.APP_KEY, App.APP_SECRET, mEditText.getText().toString(),
+            country, language, true);
+        //CloudEngineConfig config = new CloudEngineConfig(App.APP_KEY, App.APP_SECRET, mEditText.getText().toString(), true);
         QVCloudEngine.initialize(getApplicationContext(), config);
         startActivity(new Intent(this, MainActivity.class));
     }

@@ -24,7 +24,7 @@ maven {
 2. 在module目录的build.gradle文件添加依赖，**其中第三方库是compileOnly的，因此依赖需要外部添加**。
 ```
 //云端合成aar
-implementation "com.quvideo.mobile.external:cloud_engine:1.2.0"
+implementation "com.quvideo.mobile.external:cloud_engine:1.2.1"
 
 //sdk内部依赖的第三方库，是compileOnly依赖的，项目一定要依赖，目前版本按照智云给的版本
 implementation "com.squareup.okhttp3:okhttp:4.2.1"
@@ -66,6 +66,8 @@ QVCloudEngine.initialize(application, config);
 | config | 初始化配置 | CloudEngineConfig | 必须 |
 | appSecrect | 注册时申请的AppSecrect | String | 必须 |
 | userId | 第三方用户唯一标示，<br>如果没有可以传入AndroidID，广告Id等。| String | 必须 | 
+| countryCode | 国家码，如"CN",<br>如果使用默认，则不需要传递。| String | 非必须 |
+| languageCode | 语言码，如"zh",<br>如果使用默认，则不需要传递。| String | 非必须 |
 | isDebug | 是否Debug模式，Debug会打印内部日志，默认false | bool| 非必须 |
 
 ### 获取素材模版列表
