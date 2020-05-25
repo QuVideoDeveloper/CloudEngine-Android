@@ -24,7 +24,7 @@ maven {
 2. 在module目录的build.gradle文件添加依赖，**其中第三方库是compileOnly的，因此依赖需要外部添加**。
 ```
 //云端合成aar
-implementation "com.quvideo.mobile.external:cloud_engine:1.2.3"
+implementation "com.quvideo.mobile.external:cloud_engine:1.2.4"
 
 //sdk内部依赖的第三方库，是compileOnly依赖的，项目一定要依赖，目前版本按照智云给的版本
 implementation "com.squareup.okhttp3:okhttp:4.2.1"
@@ -114,7 +114,7 @@ QVCloudEngine.getTemplates(templateConfig, new onTemplateListener() {
 | maxMediaCount | 限制选择媒体文件个数 | number | 必须 |
 | title | 名称 | string | 必须 |
 | intro |简介 | string | 必须 | 
-| 素材数据类型 |简介 | DataType | 必须 |
+| dataType |素材支持数据类型 | DataType | 必须 |
 
 **RequestError：获取素材错误参数**
 | 名称  | 解释 | 类型 | 是否必须 |
