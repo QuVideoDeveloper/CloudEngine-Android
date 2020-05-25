@@ -204,7 +204,7 @@ QVCloudEngine.cancelUpload();
 ```
 // 方式二：取消某个上传中的任务
 ICompositeTask task; // 具体回调的合成任务
-int iRes = task.cancelUpload();
+int iRes = task.cancelUpload(); // 0表示取消成，20015表示不是上传阶段，无法取消
 ```
 成功取消的上传任务，将在合成回调的onCompositeListener，以State.CANCEL的参数，onNext(ICompositeTask task, State state)的状态机变化中。
 
