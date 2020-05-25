@@ -24,7 +24,7 @@ maven {
 2. 在module目录的build.gradle文件添加依赖，**其中第三方库是compileOnly的，因此依赖需要外部添加**。
 ```
 //云端合成aar
-implementation "com.quvideo.mobile.external:cloud_engine:1.2.2"
+implementation "com.quvideo.mobile.external:cloud_engine:1.2.3"
 
 //sdk内部依赖的第三方库，是compileOnly依赖的，项目一定要依赖，目前版本按照智云给的版本
 implementation "com.squareup.okhttp3:okhttp:4.2.1"
@@ -114,6 +114,7 @@ QVCloudEngine.getTemplates(templateConfig, new onTemplateListener() {
 | maxMediaCount | 限制选择媒体文件个数 | number | 必须 |
 | title | 名称 | string | 必须 |
 | intro |简介 | string | 必须 | 
+| 素材数据类型 |简介 | DataType | 必须 |
 
 **RequestError：获取素材错误参数**
 | 名称  | 解释 | 类型 | 是否必须 |
@@ -132,7 +133,12 @@ QVCloudEngine.composite(config, new onCompositeListener() {
     }
 
     @Override
-    public void onCompositeSuccess(ICompositeTask task, CompositeFinishResponse response) {
+    public void onUploadProgress(ICompositeTask task, int progress) {
+        //这里回调文件上传进度
+    }
+
+    @Override
+    public void onSuccess(ICompositeTask task, CompositeFinishResponse response) {
         //这里回调云端合成成功
     }
     
@@ -186,7 +192,21 @@ QVCloudEngine.composite(config, new onCompositeListener() {
 **State：云端合成中间状态**
 | 名称  | 解释 | 类型 | 是否必须 |
 | :-: | :-: | :-: | :-: |
-| state | IDEL, //初始状态 <br>UPLOAD, //进入文件上传阶段 <br>COMPOSITE, //进入合成阶段 <br>QUERY, //进入查询合成情况阶段 <br>TIMEOUT, //合成超时 <br>SUCCESS, //合成成功 <br>FAILURE, //合成失败 <br>FAILURE_FORCEMAKE,//合成失败但是可以强制制作  <br>STOP//停止 | State | 必须 |
+| state | IDEL, //初始状态 <br>UPLOAD, //进入文件上传阶段 <br>COMPOSITE, //进入合成阶段 <br>QUERY, //进入查询合成情况阶段 <br>TIMEOUT, //合成超时 <br>SUCCESS, //合成成功 <br>FAILURE, //合成失败 <br>CANCEL, //上传取消 <br>FAILURE_FORCEMAKE,//合成失败但是可以强制制作  <br>STOP//停止 | State | 必须 |
+### 取消合成文件上传
+只有处于文件上传阶段的任务，才可以取消。
+方式一：
+```
+// 方式一：取消所有上传中的任务
+QVCloudEngine.cancelUpload();
+```
+方式二：
+```
+// 方式二：取消某个上传中的任务
+ICompositeTask task; // 具体回调的合成任务
+int iRes = task.cancelUpload();
+```
+成功取消的上传任务，将在合成回调的onCompositeListener，以State.CANCEL的参数，onNext(ICompositeTask task, State state)的状态机变化中。
 
 ### 查询视频列表
 查询历史合成视频列表

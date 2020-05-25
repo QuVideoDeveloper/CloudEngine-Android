@@ -1,6 +1,7 @@
 package com.quvideo.mobile.demo.cloudengine;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +67,12 @@ public class CompositeActivity extends AppCompatActivity {
     private void initView() {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
+        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override public void onCancel(DialogInterface dialog) {
+                QVCloudEngine.cancelUpload();
+            }
+        });
     }
 
     //加载相册
@@ -134,6 +140,10 @@ public class CompositeActivity extends AppCompatActivity {
                  */
             }
 
+            @Override public void onUploadProgress(ICompositeTask task, int progress) {
+                Log.d("CompositeDemo", "onUploadProgress:progress = " + progress);
+            }
+
             @Override
             public void onSuccess(ICompositeTask task, CompositeFinishResponse response) {
                 mICompositeTask = task;
@@ -189,7 +199,11 @@ public class CompositeActivity extends AppCompatActivity {
                 updateProgress(100);
                 mProgressDialog.dismiss();
                 break;
-                default: break;
+            case CANCEL:
+                Toast.makeText(getApplicationContext(), "取消上传", Toast.LENGTH_LONG).show();
+                finish();
+                break;
+            default: break;
         }
     }
 
