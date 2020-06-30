@@ -25,7 +25,7 @@ maven {
 ```
 //云端合成aar
 // 1.2.5版本以下只支持armeabi-v7a和armeabi-v8a, 1.2.6之后新增对armeabi的支持，需要开发者注意自己的abi配置
-implementation "com.quvideo.mobile.external:cloud_engine:1.2.7"
+implementation "com.quvideo.mobile.external:cloud_engine:1.2.8"
 
 //sdk内部依赖的第三方库，是compileOnly依赖的，项目一定要依赖，目前版本按照智云给的版本
 implementation "com.squareup.okhttp3:okhttp:4.2.1"
