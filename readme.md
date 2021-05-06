@@ -18,7 +18,7 @@ public class App extends MultiDexApplication {
 1. 在工程目录的build.gradle文件添加Maven仓库
 ```xml
 maven {
-    url 'https://dl.bintray.com/quvideo/release'
+    url 'https://serverless-1533657941-maven.pkg.coding.net/repository/app-sdk-pub/bintray/'
 }
 ```
 2. 在module目录的build.gradle文件添加依赖，**其中第三方库是compileOnly的，因此依赖需要外部添加**。

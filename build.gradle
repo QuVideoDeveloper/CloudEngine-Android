@@ -31,7 +31,7 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'https://dl.bintray.com/quvideo/release'
+            url 'https://serverless-1533657941-maven.pkg.coding.net/repository/app-sdk-pub/bintray/'
         }
     }
 }
