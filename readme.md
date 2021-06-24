@@ -24,8 +24,8 @@ maven {
 2. 在module目录的build.gradle文件添加依赖，**其中第三方库是compileOnly的，因此依赖需要外部添加**。
 ```
 //云端合成aar
-// 1.2.5版本以下只支持armeabi-v7a和armeabi-v8a, 1.2.6之后新增对armeabi的支持，需要开发者注意自己的abi配置
-implementation "com.quvideo.mobile.external:cloud_engine:1.2.9"
+// 后续旧版本不再兼容
+implementation "com.quvideo.mobile.external:cloud_engine:1.3.0"
 
 //sdk内部依赖的第三方库，是compileOnly依赖的，项目一定要依赖，目前版本按照智云给的版本
 implementation "com.squareup.okhttp3:okhttp:4.2.1"
